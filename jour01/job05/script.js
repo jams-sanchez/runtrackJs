@@ -1,4 +1,4 @@
-function afficherJoursSemaines() {
+const afficherJoursSemaines = () => {
 
     const joursSemaines = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
 
