@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>runtrackJs</title>
+    <link href="style.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <p>
+      Dans cet exercice, six images s’assemblent pour former un arc-en-ciel, il
+      vous faudra les mélanger puis les remettre en ordre. Le but de ce job sera
+      dans un premier temps de créer une balise button. Cette balise servira à
+      mélanger l’ensemble des images de l’arc-en-ciel. Par la suite, vous devrez
+      faire en sorte qu’il soit possible de remettre les images dans le bon
+      ordre, en utilisant un ou plusieurs conteneurs. Une fois que les 6 images
+      sont ordonnées, un message s’affiche en dessous : Si l'arc-en-ciel est
+      bien reconstitué, le message “Vous avez gagné” s’affiche en vert. Sinon,
+      le message “Vous avez perdu” s’affiche en rouge.
+    </p>
+    <br />
+
+    <table class="conteneur">
+      <thead class="table">
+        <tr id="trier" class="box">
+          <th><img src="img/arc1.png" id="bouger1" /></th>
+          <th><img src="img/arc2.png" id="bouger2" /></th>
+          <th><img src="img/arc3.png" id="bouger3" /></th>
+          <th><img src="img/arc4.png" id="bouger4" /></th>
+          <th><img src="img/arc5.png" id="bouger5" /></th>
+          <th><img src="img/arc6.png" id="bouger6" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><button id="melanger">mélanger</button></td>
+        </tr>
+        <tr>
+          <td><p id="message"></p></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+
+<!-- <img src="img/arc1.png" id="bouger" class="one" />
+        <img src="img/arc2.png" id="bouger" class="two" />
+        <img src="img/arc3.png" id="bouger" class="three" />
+        <img src="img/arc4.png" id="bouger" class="four" />
+        <img src="img/arc5.png" id="bouger" class="five" />
+        <img src="img/arc6.png" id="bouger" class="six" /> -->

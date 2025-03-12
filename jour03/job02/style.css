@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.conteneur {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.table,
+.box {
+    width: 815px;
+    height: 27.5rem;
+    margin: 0 auto;
+    padding: 1rem;
+    border: 4px solid darkgray;
+    display: flex;
+    justify-content: center;
+}
+
+.table {
+    padding: 0;
+}
+
+.box {
+    border: none;
+}
+
+.box img {
+    width: 133px;
+    height: 399px;
+}
+
+button {
+    margin: 0 auto;
+    padding: 0.5rem;
+    text-transform: uppercase;
+}
