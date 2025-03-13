@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>runtrackJs</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+      integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+      crossorigin="anonymous"></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <p>
+      Créez un formulaire permettant de trier ces données. Il doit contenir les
+      champs suivants :
+    </p>
+    <ul>
+      <li>➔ id (input type text),</li>
+      <li>➔ nom (input type text),</li>
+      <li>➔ type (liste déroulante select),</li>
+      <li>➔ filtrer (input type button).</li>
+    </ul>
+    <p>
+      Lorsque l’on clique sur “filtrer”, le script doit, à l’aide de Fetch,
+      récupérer le contenu du fichier et lister les éléments répondant aux
+      critères sélectionnés en les affichant sur une page HTML.
+    </p>
+    <br />
+    <br />
+    <br />
+    <br />
+    <form action="" method="post" id="form">
+      <label>id:</label>
+      <input type="text" name="id" id="id" />
+      <label>nom:</label>
+      <input type="text" name="name" id="name" />
+      <label>type:</label>
+      <select name="type" id="type">
+        <option>--</option>
+      </select>
+      <button type="submit" id="filter">Filter</button>
+    </form>
+  </body>
+</html>

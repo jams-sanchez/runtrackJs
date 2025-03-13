@@ -5,12 +5,12 @@
 
 let objet;
 
-const getInfo = async () => {
+const getJson = async () => {
     const reponse = await fetch('./info.json');
     const info = await reponse.text();
     objet = JSON.parse(info);
 
-    jsonValueKey(objet, "city");
+    jsonValueKey(objet, "adress");
 }
 
 
@@ -18,7 +18,7 @@ const jsonValueKey = (string, cle) => {
     console.log(string[cle]);  
 }
 
-getInfo();
+getJson();
 
 
 
