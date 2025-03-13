@@ -27,8 +27,6 @@ const melangeImages = () => {
 const verifierOrdre = () => {
   let verif = $('#trier img').map(function () { 
     return $(this).attr('src'); }).get();
-
-  console.log(verif);
   
   if (verif.toString() === imagesRef.toString()) {
     $('#message').text('Vous avez gagné!').css('color', 'green');
