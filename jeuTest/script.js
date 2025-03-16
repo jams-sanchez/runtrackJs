@@ -1,3 +1,4 @@
+// choix joueur humain
 const getUserChoice = (userInput) => {
   userInput = userInput.toLowerCase();
   if (
@@ -12,6 +13,7 @@ const getUserChoice = (userInput) => {
   }
 };
 
+// choix bot
 const getComputerChoice = () => {
   let num = Math.floor(Math.random() * 3);
   switch (num) {
@@ -27,6 +29,7 @@ const getComputerChoice = () => {
   }
 };
 
+// logique de gagnant
 const determineWinner = (userChoice, computerChoice) => {
   if (userChoice === "bomb") {
     return "User won !";
@@ -59,6 +62,7 @@ const determineWinner = (userChoice, computerChoice) => {
   }
 };
 
+// joue le jeu
 const playGame = () => {
   let userChoice = getUserChoice("bomb");
   let computerChoice = getComputerChoice();
