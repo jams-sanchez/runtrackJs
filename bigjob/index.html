@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/style.css" />
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="./styles/bootstrap.min.css" />
+    <!-- fichiers perso -->
+    <!-- <link rel="stylesheet" href="./styles/style.css" /> -->
     <script src="./js/User.js" defer></script>
     <script src="./js/script.js" defer></script>
     <title>Index</title>
@@ -11,22 +14,26 @@
   <body>
     <header>
       <!-- nav barre -->
-      <nav class="nav-bar">
-        <a href="./index.html">
-          <img src="./assets/img/logo-laplateforme.png" class="logo" />
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./index.html">
+          <img
+            height="32"
+            alt=""
+            src="./assets/img/logo-laplateforme.png"
+            class="logo" />
         </a>
-        <ul>
-          <li>
-            <a href="./pages/connexion.html">Connexion</a>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Connexion</a>
           </li>
-          <li>
-            <a href="./pages/inscription.html">Inscription</a>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Inscription</a>
           </li>
-          <li>
-            <a href="./pages/backoffice.html">BackOffice</a>
+          <li class="nav-item">
+            <a class="nav-link" href="#">BackOffice</a>
           </li>
-          <li>
-            <a href="./pages/calendrier.html">Calendrier</a>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Calendrier</a>
           </li>
         </ul>
       </nav>
