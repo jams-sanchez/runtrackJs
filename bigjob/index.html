@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <script href="script.js" defer></script>
+    <title>Index</title>
+  </head>
+  <body>
+    <header>
+      <!-- nav barre -->
+      <nav class="nav-bar">
+        <a href="./index.html">
+          <img src="./assets/img/logo-laplateforme.png" class="logo" />
+        </a>
+        <ul>
+          <li>
+            <a href="./pages/connexion.html">Connexion</a>
+          </li>
+          <li>
+            <a href="./pages/inscription.html">Inscription</a>
+          </li>
+          <li>
+            <a href="./pages/backoffice.html">BackOffice</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <!-- titre -->
+      <div>
+        <h2>Tu souhaites te presenter à l'école?</h2>
+        <p>Choisi une date ci-dessous</p>
+      </div>
+      <!-- calendrier -->
+      <div class="boite-calendrier">
+        <p class="calendrier">
+          <span>◄</span>
+          {mois}
+          <span>►</span>
+        </p>
+        <table id="calendrier" class="calendrier" border="1">
+          <!-- nom des jours -->
+          <thead>
+            <tr class="jour-nom">
+              <th>lun</th>
+              <th>mar</th>
+              <th>mer</th>
+              <th>jeu</th>
+              <th>ven</th>
+              <th>sam</th>
+              <th>dim</th>
+            </tr>
+          </thead>
+          <!-- numéro des jours -->
+          <tbody>
+            <tr id="jour"></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>

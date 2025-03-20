@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <script href="../js/script.js" defer></script>
+    <title>Index</title>
+  </head>
+  <body>
+    <header>
+      <!-- nav barre -->
+      <nav class="nav-bar">
+        <a href="../index.html">
+          <img src="../assets/img/logo-laplateforme.png" class="logo" />
+        </a>
+        <ul>
+          <li>
+            <a href="../pages/connexion.html">Connexion</a>
+          </li>
+          <li>
+            <a href="../pages/inscription.html">Inscription</a>
+          </li>
+          <li>
+            <a href="../pages/backoffice.html">BackOffice</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <!-- modérateur + admin -->
+      <section>
+        <h2>Personne souhaitant venir à l'école</h2>
+        <p>Nom : {nom de l'élève}</p>
+        <p>le : {date}</p>
+        <button id="accepter" type="submit">Accepter</button>
+        <button id="refuser" type="submit">Refuser</button>
+      </section>
+      <!-- admin seulement -->
+      <section>
+        <h2>Liste des modérateur</h2>
+        <button id="ajouter" type="submit">Ajouter modérateur</button>
+        <div>
+          <p>Nom : {nom du modérateurs}</p>
+          <button id="supprimer" type="submit">Supprimer</button>
+        </div>
+      </section>
+      <section>
+        <button id="ajouter" type="submit">Ajouter admin</button>
+        <h2>Liste des admins</h2>
+        <div>
+          <p>Nom : {nom de l'admin}</p>
+          <button id="supprimer" type="submit">Supprimer</button>
+        </div>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
+</html>
