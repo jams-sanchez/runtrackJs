@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/style.css" />
-    <script href="script.js" defer></script>
+    <script src="./js/User.js" defer></script>
+    <script src="./js/script.js" defer></script>
     <title>Index</title>
   </head>
   <body>
@@ -24,6 +25,9 @@
           <li>
             <a href="./pages/backoffice.html">BackOffice</a>
           </li>
+          <li>
+            <a href="./pages/calendrier.html">Calendrier</a>
+          </li>
         </ul>
       </nav>
     </header>
@@ -31,33 +35,7 @@
       <!-- titre -->
       <div>
         <h2>Tu souhaites te presenter à l'école?</h2>
-        <p>Choisi une date ci-dessous</p>
-      </div>
-      <!-- calendrier -->
-      <div class="boite-calendrier">
-        <p class="calendrier">
-          <span>◄</span>
-          {mois}
-          <span>►</span>
-        </p>
-        <table id="calendrier" class="calendrier" border="1">
-          <!-- nom des jours -->
-          <thead>
-            <tr class="jour-nom">
-              <th>lun</th>
-              <th>mar</th>
-              <th>mer</th>
-              <th>jeu</th>
-              <th>ven</th>
-              <th>sam</th>
-              <th>dim</th>
-            </tr>
-          </thead>
-          <!-- numéro des jours -->
-          <tbody>
-            <tr id="jour"></tr>
-          </tbody>
-        </table>
+        <p>Connecte toi et choisi une date</p>
       </div>
     </main>
     <footer></footer>

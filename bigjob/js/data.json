@@ -1,0 +1,64 @@
+[
+    { "membres" : [
+
+        {
+            "id": 1,
+            "email": "james@laplateforme.io",
+            "motDePasse": "james",
+            "role": "eleve",
+            "connecte": false
+        }, 
+        {
+            "id": 2,
+            "email": "eleve1@laplateforme.io",
+            "motDePasse": "eleve1Pass",
+            "role": "eleve",
+            "connecte": false
+        }, 
+        {
+            "id": 3,
+            "email": "eleve2@laplateforme.io",
+            "motDePasse": "eleve2Pass",
+            "role": "eleve",
+            "connecte": false
+        },
+        {
+            "id": 4,
+            "email": "mod1@laplateforme.io",
+            "motDePasse": "mod1Pass",
+            "role": "moderateur",
+            "connecte": false
+        },
+        {
+            "id": 5,
+            "email": "mod2@laplateforme.io",
+            "motDePasse": "mod2Pass",
+            "role": "moderateur",
+            "connecte": false
+        },
+        {
+            "id": 6,
+            "email": "admin1@laplateforme.io",
+            "motDePasse": "admin1Pass",
+            "role": "admin",
+            "connecte": false
+        },
+        {
+            "id": 7,
+            "email": "admin2@laplateforme.io",
+            "motDePasse": "admin2Pass",
+            "role": "admin", 
+            "connecte": false
+        }
+    ],
+    "requetes" : [
+        {
+            "id": 1,
+            "user_id": 1,
+            "date": "2025-03-20",
+            "statut": "pending"
+        }
+    ]
+
+}
+]

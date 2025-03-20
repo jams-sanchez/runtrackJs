@@ -39,6 +39,12 @@
 
 /* calendrier */
 
+.titre-calendrier {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 .boite-calendrier {
     border: 2px solid black;
     width: 80%;
