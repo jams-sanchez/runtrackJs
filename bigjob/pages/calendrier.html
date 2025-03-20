@@ -32,11 +32,32 @@
       </nav>
     </header>
     <main>
-      <form>
-        <input id="email" type="text" placeholder="Email" />
-        <input id="motDePasse" type="password" placeholder="Mot de passe" />
-        <button id="connexion">Se connecter</button>
-      </form>
+      <!-- calendrier -->
+      <div class="boite-calendrier">
+        <div class="titre-calendrier">
+          <p class="avant">◄</p>
+          <p class="mois">{mois}</p>
+          <p class="apres">►</p>
+        </div>
+        <table id="calendrier" class="calendrier" border="1">
+          <!-- nom des jours -->
+          <thead>
+            <tr class="jour-nom">
+              <th>lun</th>
+              <th>mar</th>
+              <th>mer</th>
+              <th>jeu</th>
+              <th>ven</th>
+              <th>sam</th>
+              <th>dim</th>
+            </tr>
+          </thead>
+          <!-- numéro des jours -->
+          <tbody>
+            <tr id="jour"></tr>
+          </tbody>
+        </table>
+      </div>
     </main>
     <footer></footer>
   </body>
