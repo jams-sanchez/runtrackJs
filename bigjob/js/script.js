@@ -1,3 +1,6 @@
+let fausseBDD = JSON.parse(sessionStorage.getItem("infos"));
+console.log(fausseBDD);
+
 // MESSAGE: style message d'info ou d'erreur
 const infoMsg = document.createElement("p");
 infoMsg.innerHTML = "Veuillez remplir tous les champs.";
@@ -6,9 +9,10 @@ infoMsg.style.fontSize = "1rem";
 infoMsg.style.fontWeight = "bold";
 
 // ELEMENTS:
-// connexion
+// connexion / inscription
 const form = document.querySelector("form");
 const btnConnexion = document.getElementById("connexion");
+const btnInscription = document.getElementById("inscription");
 const inputEmail = document.getElementById("email");
 const inputPass = document.getElementById("motDePasse");
 // backoffice
@@ -30,25 +34,14 @@ if (email || nom || role) {
   console.log("role sauvegardé: ", role);
 }
 
-// BACKOFFICE : affichage des elements page backoffice
+// BACKOFFICE: affichage des elements page backoffice
 if (role && role === "moderateur") {
   if (adminSection) {
     adminSection.style.display = "none";
   }
 }
 
-// JSON : récupération des données
-const getJson = async () => {
-  try {
-    const reponse = await fetch("../js/data.json");
-    const fullData = await reponse.json();
-    return fullData;
-  } catch (error) {
-    console.error("Erreur de chargement: ", error);
-  }
-};
-
-// CONNEXION : vérifie le mail et mot de passe
+// CONNEXION: vérifie le mail et mot de passe
 const verifInfo = (mail, pass) => {
   getJson().then((data) => {
     if (data) {
@@ -79,11 +72,7 @@ const verifInfo = (mail, pass) => {
               if (membre.role === "eleve") {
                 location.href = "../pages/calendrier.html";
               } else {
-                if (membre.role === "moderateur") {
-                  location.href = "../pages/backoffice.html";
-                } else {
-                  location.href = "../pages/backoffice.html";
-                }
+                location.href = "../pages/backoffice.html";
               }
             }, 2000);
           } else {
@@ -106,7 +95,7 @@ const verifInfo = (mail, pass) => {
   });
 };
 
-// CONNEXION : déclenche la connexion
+// CONNEXION: déclenche la connexion
 if (btnConnexion) {
   btnConnexion.addEventListener("click", () => {
     const emailValue = inputEmail.value.trim();
@@ -122,5 +111,30 @@ if (btnConnexion) {
       infoMsg.remove();
       verifInfo(emailValue, passwordValue);
     }
+  });
+}
+
+// INSCRIPTION
+
+// verif email
+function looksLikeMail(mail) {
+  const lastAtPos = mail.lastIndexOf("@");
+  const laPlat = "@laplateforme.io";
+
+  // return (
+  //   lastAtPos < lastDotPos &&
+  //   lastAtPos > 0 &&
+  //   mail.indexOf("@@") == -1 &&
+  //   lastDotPos > 2 &&
+  //   mail.length - lastDotPos > 2
+  // );
+}
+
+// lancement de l'inscription
+if (btnInscription) {
+  btnInscription.addEventListener("click", () => {
+    const emailValue = inputEmail.value.trim();
+
+    console.log(emailValue);
   });
 }
