@@ -1,24 +1,43 @@
-// affichage msg info / error
+// MESSAGE: style message d'info ou d'erreur
 const infoMsg = document.createElement("p");
 infoMsg.innerHTML = "Veuillez remplir tous les champs.";
 infoMsg.style.color = "red";
 infoMsg.style.fontSize = "1rem";
 infoMsg.style.fontWeight = "bold";
 
-// variables CONNEXION
+// ELEMENTS:
+// connexion
 const form = document.querySelector("form");
 const btnConnexion = document.getElementById("connexion");
 const inputEmail = document.getElementById("email");
 const inputPass = document.getElementById("motDePasse");
-let email;
-let password;
+// backoffice
+const adminSection = document.getElementById("adminSection");
 
-// empêche les boutons d'actualiser la page
+// empêche les boutons d'un formulaire d'actualiser la page
 if (form) {
-  form.addEventListener("click", (e) => e.preventDefault());
+  form.addEventListener("submit", (e) => e.preventDefault());
 }
 
-// récupération des données
+// SAUVEGARDE: Infos du membre connecté en session
+const email = sessionStorage.getItem("email");
+const nom = sessionStorage.getItem("nom");
+const role = sessionStorage.getItem("role");
+
+if (email || nom || role) {
+  console.log("email sauvegardé: ", email);
+  console.log("nom sauvegardé: ", nom);
+  console.log("role sauvegardé: ", role);
+}
+
+// BACKOFFICE : affichage des elements page backoffice
+if (role && role === "moderateur") {
+  if (adminSection) {
+    adminSection.style.display = "none";
+  }
+}
+
+// JSON : récupération des données
 const getJson = async () => {
   try {
     const reponse = await fetch("../js/data.json");
@@ -29,8 +48,8 @@ const getJson = async () => {
   }
 };
 
-// vérifie le mail et mot de passe
-const verifInfo = () => {
+// CONNEXION : vérifie le mail et mot de passe
+const verifInfo = (mail, pass) => {
   getJson().then((data) => {
     if (data) {
       let membres = data.find((item) => item.membres)?.membres;
@@ -38,16 +57,34 @@ const verifInfo = () => {
       let passTrouve = false;
 
       membres.forEach((membre) => {
-        if (membre.email === email) {
+        if (membre.email === mail) {
           mailTrouve = true;
-          if (password === membre.motDePasse) {
+          if (membre.motDePasse === pass) {
             passTrouve = true;
             membre.connecte = true;
-            infoMsg.innerText = ` Vous êtes connecté en tant que ${membre.role}`;
+            infoMsg.innerText = "Vous êtes connecté";
             form.append(infoMsg);
+
+            // stockage des infos user connecté dans une session
+            sessionStorage.setItem("email", mail);
+            sessionStorage.setItem("role", membre.role);
+            let creeNom = mail.replace("@", " ");
+            creeNom = creeNom.split(" ");
+            creeNom = creeNom[0];
+            sessionStorage.setItem("nom", creeNom);
+
+            // redirection vers page selon role
             setTimeout(() => {
               infoMsg.remove();
-              location.href = "../pages/calendrier.html";
+              if (membre.role === "eleve") {
+                location.href = "../pages/calendrier.html";
+              } else {
+                if (membre.role === "moderateur") {
+                  location.href = "../pages/backoffice.html";
+                } else {
+                  location.href = "../pages/backoffice.html";
+                }
+              }
             }, 2000);
           } else {
             passTrouve = false;
@@ -69,13 +106,12 @@ const verifInfo = () => {
   });
 };
 
-// déclenche la connexion
+// CONNEXION : déclenche la connexion
 if (btnConnexion) {
   btnConnexion.addEventListener("click", () => {
-    email = inputEmail.value.trim();
-    password = inputPass.value.trim();
-
-    if (!email || !password) {
+    const emailValue = inputEmail.value.trim();
+    const passwordValue = inputPass.value.trim();
+    if (!emailValue || !passwordValue) {
       console.error("Veuillez remplir tous les champs.");
       form.append(infoMsg);
       if (infoMsg) {
@@ -84,7 +120,7 @@ if (btnConnexion) {
       }
     } else {
       infoMsg.remove();
-      verifInfo(email, password);
+      verifInfo(emailValue, passwordValue);
     }
   });
 }

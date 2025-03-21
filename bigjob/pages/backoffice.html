@@ -33,7 +33,7 @@
     </header>
     <main>
       <!-- modérateur + admin -->
-      <section>
+      <section id="mod">
         <h2>Personne souhaitant venir à l'école</h2>
         <p>Nom : {nom de l'élève}</p>
         <p>le : {date}</p>
@@ -41,21 +41,23 @@
         <button id="refuser" type="submit">Refuser</button>
       </section>
       <!-- admin seulement -->
-      <section>
-        <h2>Liste des modérateur</h2>
-        <button id="ajouter" type="submit">Ajouter modérateur</button>
-        <div>
-          <p>Nom : {nom du modérateurs}</p>
-          <button id="supprimer" type="submit">Supprimer</button>
-        </div>
-      </section>
-      <section>
-        <button id="ajouter" type="submit">Ajouter admin</button>
-        <h2>Liste des admins</h2>
-        <div>
-          <p>Nom : {nom de l'admin}</p>
-          <button id="supprimer" type="submit">Supprimer</button>
-        </div>
+      <section id="adminSection">
+        <section>
+          <h2>Liste des modérateur</h2>
+          <button id="ajouter" type="submit">Ajouter modérateur</button>
+          <div>
+            <p>Nom : {nom du modérateurs}</p>
+            <button id="supprimer" type="submit">Supprimer</button>
+          </div>
+        </section>
+        <section>
+          <button id="ajouter" type="submit">Ajouter admin</button>
+          <h2>Liste des admins</h2>
+          <div>
+            <p>Nom : {nom de l'admin}</p>
+            <button id="supprimer" type="submit">Supprimer</button>
+          </div>
+        </section>
       </section>
     </main>
     <footer></footer>
