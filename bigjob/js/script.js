@@ -12,6 +12,7 @@ let users = JSON.parse(sessionStorage.getItem("users"));
 // MESSAGE: style message d'info ou d'erreur
 const infoMsg = document.createElement("p");
 infoMsg.innerHTML = "Veuillez remplir tous les champs.";
+infoMsg.style.textAlign = "center";
 infoMsg.style.color = "red";
 infoMsg.style.fontSize = "1rem";
 infoMsg.style.fontWeight = "bold";
