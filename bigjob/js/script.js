@@ -157,17 +157,30 @@ if (btnInscription) {
 
     if (verifMail(emailValue)) {
       if (verifMembre(emailValue)) {
-        console.log("ce mail est deja utilisé");
+        infoMsg.innerText = "Cet email est déjà utilisé.";
+        form.append(infoMsg);
       } else {
-        console.log("verif pass");
         if (verifPass(passwordValue)) {
-          console.log("vous etes desormais inscrit");
+          //ajout dans fausse bdd
+          let newMembre = new Membre(emailValue, passwordValue);
+          users.push(newMembre);
+          sessionStorage.setItem("users", JSON.stringify(users));
+          // msg info succes
+          infoMsg.innerText = "Vous êtes désormais inscrit.";
+          form.append(infoMsg);
+          // redirection sur la connexion
+          setTimeout(() => {
+            infoMsg.remove();
+            location.href = "../pages/connexion.html";
+          }, 2000);
         } else {
-          console.log("le mot de passe ne remplit pas les conditions");
+          infoMsg.innerText = "Le mot de passe ne remplit pas les conditions";
+          form.append(infoMsg);
         }
       }
     } else {
-      console.log("email incorrect");
+      infoMsg.innerText = "Veuillez saisir un email.";
+      form.append(infoMsg);
     }
   });
 }
