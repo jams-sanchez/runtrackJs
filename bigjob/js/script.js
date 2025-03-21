@@ -53,13 +53,11 @@ if (role && role === "moderateur") {
 const verifInfo = (mail, pass) => {
   if (users) {
     let mailTrouve = false;
-    let passTrouve = false;
 
     users.forEach((membre) => {
       if (membre.email === mail) {
         mailTrouve = true;
         if (membre.motDePasse === pass) {
-          passTrouve = true;
           membre.connecte = true;
           infoMsg.innerText = "Vous êtes connecté";
           form.append(infoMsg);
@@ -82,7 +80,6 @@ const verifInfo = (mail, pass) => {
             }
           }, 2000);
         } else {
-          passTrouve = false;
           infoMsg.innerText = "Mot de passe incorrect";
           form.append(infoMsg);
           if (infoMsg) {
@@ -119,27 +116,58 @@ if (btnConnexion) {
   });
 }
 
-// INSCRIPTION
+// INSCRIPTION: vérification mot de passe
+const verifPass = (pass) => {
+  const regex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]:;"'<>,.?/\\|-]).{8,}$/;
+  return regex.test(pass);
+};
 
-// verif email
-function looksLikeMail(mail) {
+// INSCRIPTION: vérification si le mail est deja utilisé
+const verifMembre = (mail) => {
+  let count = 0;
+  for (membre of users) {
+    if (mail === membre.email) {
+      count++;
+    }
+  }
+
+  if (count > 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+// INSCRIPTION: vérification email
+const verifMail = (mail) => {
   const lastAt = mail.lastIndexOf("@");
   const beforeAt = mail.slice(0, lastAt); // texte avant @
   const afterAt = mail.slice(lastAt + 1); // texte apres @
   const laPlat = "laplateforme.io";
   const regex = /^[A-Za-z0-9]+$/; // lettres maj ou min ou chiffres
-
-  // console.log(lastAt > 3 && afterAt === laPlat && regex.test(beforeAt));
   return lastAt > 3 && afterAt === laPlat && regex.test(beforeAt);
-}
+};
 
-looksLikeMail("testi@laplat@eforme.io");
-
-// lancement de l'inscription
+// INSCRIPTION: lancement de l'inscription
 if (btnInscription) {
   btnInscription.addEventListener("click", () => {
     const emailValue = inputEmail.value.trim();
+    const passwordValue = inputPass.value.trim();
 
-    console.log(emailValue);
+    if (verifMail(emailValue)) {
+      if (verifMembre(emailValue)) {
+        console.log("ce mail est deja utilisé");
+      } else {
+        console.log("verif pass");
+        if (verifPass(passwordValue)) {
+          console.log("vous etes desormais inscrit");
+        } else {
+          console.log("le mot de passe ne remplit pas les conditions");
+        }
+      }
+    } else {
+      console.log("email incorrect");
+    }
   });
 }
