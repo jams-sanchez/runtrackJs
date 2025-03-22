@@ -1,14 +1,6 @@
 let users = JSON.parse(sessionStorage.getItem("users"));
 // console.log(users);
 
-//
-// pour creer nouveau membre //
-// let signup = new Membre("bla@laplateforme.io", "test");
-// users.push(signup);
-// console.log(users);
-// sessionStorage.setItem("users", JSON.stringify(users));
-//
-
 // MESSAGE: style message d'info ou d'erreur
 const infoMsg = document.createElement("p");
 infoMsg.innerHTML = "Veuillez remplir tous les champs.";
