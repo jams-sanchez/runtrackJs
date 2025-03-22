@@ -16,89 +16,108 @@
       defer></script>
     <link rel="stylesheet" href="../styles/style.css" />
     <!-- <link rel="stylesheet" href="../styles/form.css" /> -->
-    <script src="../js/calendrier.js" defer></script>
-    <script src="../js/script.js" defer></script>
-    <title>Connexion</title>
+    <script src="../js/Demande.js" defer></script>
+    <script src="../js/scriptCalendrier.js" defer></script>
+    <title>Calendrier</title>
   </head>
-  <body class="d-flex text-center text-bg-dark flex-column">
-    <header class="mb-auto">
-      <nav
-        class="navbar navbar-expand-lg navbar-dark bg-dark"
-        aria-label="Eighth navbar example">
-        <div class="container">
-          <a class="navbar-brand d-flex align-items-center" href="../index.html"
-            ><img
-              alt="Logo"
-              height="18"
-              class="d-inline-block align-text-top"
-              src="../assets/img/logo-laplateforme.png"
-          /></a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarsExample07"
-            aria-controls="navbarsExample07"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+  <body class="d-flex h-100 text-center text-bg-dark flex-column">
+    <div class="cover-container d-flex w-100 h-100 pt-3 mx-auto flex-column">
+      <header class="mb-auto">
+        <nav
+          class="navbar navbar-expand-lg navbar-dark bg-dark"
+          aria-label="Eighth navbar example">
+          <div class="container">
+            <a
+              class="navbar-brand d-flex align-items-center"
+              href="../index.html"
+              ><img
+                alt="Logo"
+                height="18"
+                class="d-inline-block align-text-top"
+                src="../assets/img/logo-laplateforme.png"
+            /></a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarsExample07"
+              aria-controls="navbarsExample07"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-          <div class="collapse navbar-collapse" id="navbarsExample07">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="../index.html"
-                  >Accueil</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../pages/inscription.html"
-                  >Inscription</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../pages/connexion.html">Connexion</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../pages/backoffice.html"
-                  >BackOffice</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="../pages/calendrier.html"
-                  >Calendrier</a
-                >
-              </li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="../index.html"
+                    >Accueil</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../pages/inscription.html"
+                    >Inscription</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../pages/connexion.html"
+                    >Connexion</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../pages/backoffice.html"
+                    >BackOffice</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="../pages/calendrier.html"
+                    >Calendrier</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main class="container-fluid">
+        <!-- calendrier -->
+        <div class="boite-calendrier m-auto">
+          <div class="container d-flex gap-5 justify-content-center">
+            <p id="avant">◄</p>
+            <p id="moisNom"></p>
+            <p id="apres">►</p>
+          </div>
+          <!-- <div id="jour-nom"></div> -->
+          <table id="calendrier" class="calendrier m-auto" border="1">
+            <!-- nom des jours -->
+            <thead>
+              <tr id="jour-nom"></tr>
+            </thead>
+            <!-- numéro des jours -->
+            <tbody id="jour"></tbody>
+          </table>
+          <div class="d-flex gap-5 justify-content-center">
+            <p><span class="red">●</span> validé</p>
+            <p><span class="orange">●</span> en attente</p>
+            <p><span class="green">●</span> annulé</p>
+          </div>
+          <div>
+            <button
+              id="choix-date"
+              class="btn btn-primary px-4 btn-lg mb-4 mx-2"
+              type="submit">
+              Choisir cette date
+            </button>
           </div>
         </div>
-      </nav>
-    </header>
-    <main class="container-fluid">
-      <!-- calendrier -->
-      <div class="boite-calendrier m-auto">
-        <div class="container d-flex gap-5 justify-content-center">
-          <p id="avant">◄</p>
-          <p id="moisNom"></p>
-          <p id="apres">►</p>
+      </main>
+      <footer class="mt-auto text-secondary mx-auto">
+        <div class="d-flex gap-5">
+          <p>contact@laplateforme.io</p>
+          <p>8 rue d'Hozier 13002 Marseille</p>
+          <p>04.84.89.43.69</p>
         </div>
-        <!-- <div id="jour-nom"></div> -->
-        <table id="calendrier" class="calendrier m-auto" border="1">
-          <!-- nom des jours -->
-          <thead>
-            <tr id="jour-nom"></tr>
-          </thead>
-          <!-- numéro des jours -->
-          <tbody id="jour"></tbody>
-        </table>
-      </div>
-    </main>
-    <!-- <footer class="mt-auto text-secondary mx-auto">
-      <div class="d-flex gap-5">
-        <p>contact@laplateforme.io</p>
-        <p>8 rue d'Hozier 13002 Marseille</p>
-        <p>04.84.89.43.69</p>
-      </div>
-    </footer> -->
+      </footer>
+    </div>
   </body>
 </html>

@@ -1,4 +1,5 @@
 let users = JSON.parse(sessionStorage.getItem("users"));
+let demandes = JSON.parse(sessionStorage.getItem("demandes"));
 // console.log(users);
 
 // MESSAGE: style message d'info ou d'erreur
@@ -28,12 +29,6 @@ if (form) {
 const email = sessionStorage.getItem("email");
 const nom = sessionStorage.getItem("nom");
 const role = sessionStorage.getItem("role");
-
-if (email || nom || role) {
-  console.log("email sauvegardé: ", email);
-  console.log("nom sauvegardé: ", nom);
-  console.log("role sauvegardé: ", role);
-}
 
 // BACKOFFICE: affichage des elements page backoffice
 if (role && role === "moderateur") {

@@ -14,10 +14,8 @@
     gap: 1rem;
 }
 
-.titre-calendrier {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+#moisNom {
+    width: 30%;
 }
 
 .calendrier {
@@ -37,5 +35,13 @@
     aspect-ratio: 1 / 1;
 }
 
-
+.green {
+    color: #d13c3cda;
+}
+.orange {
+    color: #ffa600de ;
+}
+.red {
+    color: #0fb900bb ;
+}
 
