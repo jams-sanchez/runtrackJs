@@ -8,6 +8,7 @@ const calendrier = document.getElementById("jour");
 const moisNom = document.getElementById("moisNom");
 const listeJours = document.getElementById("jour-nom");
 const choixBtn = document.getElementById("choix-date");
+const infoMsg = document.getElementById("msg");
 
 // empêche le bouton d'actualiser la page
 if (choixBtn) {
@@ -67,7 +68,7 @@ const createCalendrier = (month, year) => {
 
   // affichage des noms des jours
   jours.forEach((jour) => {
-    let jourText = document.createElement("th");
+    let jourText = document.createElement("td");
     jourText.innerHTML = jour.slice(0, 3);
     listeJours.appendChild(jourText);
   });
@@ -156,13 +157,10 @@ const verifDate = (demandeDate) => {
 const afficheDate = () => {
   if (demandes) {
     let dateCase = document.getElementsByTagName("td");
-    console.log(demandes);
 
     demandes.forEach((demande) => {
       if (demande.eleve === sessionStorage.getItem("email")) {
-        console.log(demande.date);
         let recupDate = demande.date.split("-");
-        console.log(recupDate);
         let date = [];
         recupDate.forEach((item) => date.push(parseInt(item)));
         if (moisPage === date[1] - 1) {
@@ -247,7 +245,6 @@ calendrier.addEventListener("click", (e) => {
       jourSelect === "samedi" ||
       jourSelect === "dimanche"
     ) {
-      // => definir message d'erreur <=
       fullDateSelected = "";
       choixBtn.style.visibility = "hidden";
       console.log("Date passé ou weekend");
@@ -260,8 +257,6 @@ calendrier.addEventListener("click", (e) => {
         select.style.backgroundColor = "white";
         select.style.color = "black";
         dateClique = select;
-      } else {
-        // message info : affiche statut de la demande
       }
     }
   }

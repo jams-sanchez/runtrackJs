@@ -1,9 +1,6 @@
 let users = JSON.parse(sessionStorage.getItem("users"));
 let demandes = JSON.parse(sessionStorage.getItem("demandes"));
 
-// MESSAGE: style message d'info ou d'erreur
-// const infoMsg = document.createElement("p");
-
 // ELEMENTS:
 // connexion / inscription
 const form = document.querySelector("form");
