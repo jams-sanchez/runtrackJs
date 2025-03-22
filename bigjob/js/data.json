@@ -54,9 +54,21 @@
     "requetes" : [
         {
             "id": 1,
-            "user_id": 1,
-            "date": "2025-03-20",
-            "statut": "pending"
+            "eleve": "james@laplateforme.io",
+            "date": "27-3-2025",
+            "statut": "validé"
+        },
+        {
+            "id": 2,
+            "eleve": "james@laplateforme.io",
+            "date": "16-4-2025",
+            "statut": "en attente"
+        },
+        {
+            "id": 3,
+            "eleve": "james@laplateforme.io",
+            "date": "21-3-2025",
+            "statut": "annulé"
         }
     ]
 

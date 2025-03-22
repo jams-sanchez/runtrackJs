@@ -1,64 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.ico" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+      defer></script>
     <link rel="stylesheet" href="../styles/style.css" />
-    <script src="../js/User.js" defer></script>
-    <script src="../js/script.js" defer></script>
-    <title>Connexion</title>
+    <!-- <link rel="stylesheet" href="../styles/form.css" /> -->
+    <script src="../js/Demande.js" defer></script>
+    <script src="../js/scriptCalendrier.js" defer></script>
+    <title>Calendrier</title>
   </head>
-  <body>
-    <header>
-      <!-- nav barre -->
-      <nav class="nav-bar">
-        <a href="../index.html">
-          <img src="../assets/img/logo-laplateforme.png" class="logo" />
-        </a>
-        <ul>
-          <li>
-            <a href="../pages/connexion.html">Connexion</a>
-          </li>
-          <li>
-            <a href="../pages/inscription.html">Inscription</a>
-          </li>
-          <li>
-            <a href="../pages/backoffice.html">BackOffice</a>
-          </li>
-          <li>
-            <a href="../pages/calendrier.html">Calendrier</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <!-- calendrier -->
-      <div class="boite-calendrier">
-        <div class="titre-calendrier">
-          <p class="avant">◄</p>
-          <p class="mois">{mois}</p>
-          <p class="apres">►</p>
+  <body class="d-flex h-100 text-center text-bg-dark flex-column">
+    <div class="cover-container d-flex w-100 h-100 pt-3 mx-auto flex-column">
+      <header class="mb-auto">
+        <nav
+          class="navbar navbar-expand-lg navbar-dark bg-dark"
+          aria-label="Eighth navbar example">
+          <div class="container">
+            <a
+              class="navbar-brand d-flex align-items-center"
+              href="../index.html"
+              ><img
+                alt="Logo"
+                height="18"
+                class="d-inline-block align-text-top"
+                src="../assets/img/logo-laplateforme.png"
+            /></a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarsExample07"
+              aria-controls="navbarsExample07"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="../index.html"
+                    >Accueil</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../pages/inscription.html"
+                    >Inscription</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../pages/connexion.html"
+                    >Connexion</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../pages/backoffice.html"
+                    >BackOffice</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="../pages/calendrier.html"
+                    >Calendrier</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main class="container-fluid">
+        <!-- calendrier -->
+        <div class="boite-calendrier m-auto">
+          <div
+            class="d-flex gap-5 mb-3 fs-4 align-items-center justify-content-center">
+            <p id="avant" class="mb-0">◄</p>
+            <p id="moisNom" class="fs-3 mb-0"></p>
+            <p id="apres" class="mb-0">►</p>
+          </div>
+          <!-- <div id="jour-nom"></div> -->
+          <table id="calendrier" class="calendrier m-auto">
+            <!-- nom des jours -->
+            <thead>
+              <tr id="jour-nom"></tr>
+            </thead>
+            <!-- numéro des jours -->
+            <tbody id="jour"></tbody>
+          </table>
+          <div
+            class="d-flex gap-5 w-100 m-auto justify-content-center text-center align-items-center">
+            <p class="legend mb-0"><span class="red">●</span> validé</p>
+            <p class="legend mb-0"><span class="orange">●</span> en attente</p>
+            <p class="legend mb-0"><span class="green">●</span> annulé</p>
+          </div>
+          <div>
+            <button
+              id="choix-date"
+              class="btn btn-primary px-4 btn-lg mb-4 mx-2"
+              type="submit">
+              Choisir cette date
+            </button>
+          </div>
         </div>
-        <table id="calendrier" class="calendrier" border="1">
-          <!-- nom des jours -->
-          <thead>
-            <tr class="jour-nom">
-              <th>lun</th>
-              <th>mar</th>
-              <th>mer</th>
-              <th>jeu</th>
-              <th>ven</th>
-              <th>sam</th>
-              <th>dim</th>
-            </tr>
-          </thead>
-          <!-- numéro des jours -->
-          <tbody>
-            <tr id="jour"></tr>
-          </tbody>
-        </table>
-      </div>
-    </main>
-    <footer></footer>
+      </main>
+      <footer class="mt-auto text-secondary mx-auto">
+        <div
+          class="d-flex flex-column flex-sm-row gap-2 gap-sm-5 justify-content-center align-items-center">
+          <p class="mb-0">contact@laplateforme.io</p>
+          <p class="mb-0">8 rue d'Hozier 13002 Marseille</p>
+          <p class="mb-0">04.84.89.43.69</p>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

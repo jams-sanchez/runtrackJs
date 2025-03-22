@@ -3,60 +3,69 @@
     padding: 0;
     list-style: none;
     box-sizing: border-box;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-/* nav bar */
-
-.nav-bar {
-    background-color: rgb(203, 203, 203);
-    width: 100%;
-    height: 4rem;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-bar ul {
-    display: flex;
-    gap: 3rem;
-}
-
-.nav-bar .logo {
-    height: 2rem;
-}
-
-/* main */
-
-.main {
-    padding: 3rem 0;
+.msg-info {
+    color: blue;
+    font-weight: bold;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    font-size: 1.2rem;
+}
+.msg-error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+}
+.msg-succes {
+    color: rgb(0, 218, 0);
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
 }
 
 /* calendrier */
 
-.titre-calendrier {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
 .boite-calendrier {
-    border: 2px solid black;
-    width: 80%;
-    margin: 0 auto;
-    padding: 1rem;
+    width: 100%;
+    max-width: 30rem;
+    height: auto;
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
+#moisNom {
+    width: 30%;
+}
+
 .calendrier {
     width: 100%;
+    max-width: 30rem;
+    height: auto;
+    table-layout: fixed;
+    aspect-ratio: 1 / 1;
     text-align: center;
+}
+
+.calendrier tr,
+.calendrier td {
+    height: 4%;
+    width: 4%;
+    aspect-ratio: 1 / 1;
+}
+
+.legend {
+    width: 20%;
+}
+
+.green {
+    color: #e43131da;
+}
+.orange {
+    color: #ffa600de ;
+}
+.red {
+    color: #12db00d3 ;
 }
 
