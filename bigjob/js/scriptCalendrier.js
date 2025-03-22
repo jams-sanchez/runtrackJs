@@ -12,6 +12,7 @@ const choixBtn = document.getElementById("choix-date");
 // empêche le bouton d'actualiser la page
 if (choixBtn) {
   choixBtn.addEventListener("submit", (e) => e.preventDefault());
+  choixBtn.style.visibility = "hidden";
 }
 
 // variable const
@@ -155,10 +156,13 @@ const verifDate = (demandeDate) => {
 const afficheDate = () => {
   if (demandes) {
     let dateCase = document.getElementsByTagName("td");
+    console.log(demandes);
 
     demandes.forEach((demande) => {
       if (demande.eleve === sessionStorage.getItem("email")) {
+        console.log(demande.date);
         let recupDate = demande.date.split("-");
+        console.log(recupDate);
         let date = [];
         recupDate.forEach((item) => date.push(parseInt(item)));
         if (moisPage === date[1] - 1) {
@@ -172,7 +176,7 @@ const afficheDate = () => {
           } else if (demande.statut === "annulé") {
             Array.from(dateCase).forEach((td) => {
               if (td.textContent === date[0].toString()) {
-                td.style.backgroundColor = "#d13c3cc2";
+                td.style.backgroundColor = "rgba(255, 0, 0, 0.842)";
                 td.style.cursor = "default";
               }
             });
@@ -193,6 +197,7 @@ const afficheDate = () => {
 // GESTION CLIQUE: clique mois avant
 avant.addEventListener("click", () => {
   clic--;
+  choixBtn.style.visibility = "hidden";
 
   const newMois = jourActuel.getMonth() + clic;
   if (newMois === 0) {
@@ -208,6 +213,7 @@ avant.addEventListener("click", () => {
 // GESTION CLIQUE: clique mois apres
 apres.addEventListener("click", () => {
   clic++;
+  choixBtn.style.visibility = "hidden";
 
   const newMois = jourActuel.getMonth() + clic;
   if (newMois === 11) {

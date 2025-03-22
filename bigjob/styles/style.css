@@ -5,9 +5,30 @@
     box-sizing: border-box;
 }
 
+.msg-info {
+    color: blue;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+}
+.msg-error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+}
+.msg-succes {
+    color: rgb(0, 218, 0);
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
 /* calendrier */
 
 .boite-calendrier {
+    width: 100%;
+    max-width: 30rem;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -20,28 +41,31 @@
 
 .calendrier {
     width: 100%;
+    max-width: 30rem;
     height: auto;
     table-layout: fixed;
     aspect-ratio: 1 / 1;
-    max-width: 30rem;
     text-align: center;
 }
 
-.calendrier tr {
-    height: 7%;
-}
-
+.calendrier tr,
 .calendrier td {
+    height: 4%;
+    width: 4%;
     aspect-ratio: 1 / 1;
 }
 
+.legend {
+    width: 20%;
+}
+
 .green {
-    color: #d13c3cda;
+    color: #e43131da;
 }
 .orange {
     color: #ffa600de ;
 }
 .red {
-    color: #0fb900bb ;
+    color: #12db00d3 ;
 }
 

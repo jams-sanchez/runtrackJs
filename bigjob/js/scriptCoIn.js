@@ -1,14 +1,8 @@
 let users = JSON.parse(sessionStorage.getItem("users"));
 let demandes = JSON.parse(sessionStorage.getItem("demandes"));
-// console.log(users);
 
 // MESSAGE: style message d'info ou d'erreur
-const infoMsg = document.createElement("p");
-infoMsg.innerHTML = "Veuillez remplir tous les champs.";
-infoMsg.style.textAlign = "center";
-infoMsg.style.color = "red";
-infoMsg.style.fontSize = "1rem";
-infoMsg.style.fontWeight = "bold";
+// const infoMsg = document.createElement("p");
 
 // ELEMENTS:
 // connexion / inscription
@@ -17,6 +11,7 @@ const btnConnexion = document.getElementById("connexion");
 const btnInscription = document.getElementById("inscription");
 const inputEmail = document.getElementById("email");
 const inputPass = document.getElementById("motDePasse");
+const infoMsg = document.getElementById("msg");
 // backoffice
 const adminSection = document.getElementById("adminSection");
 
@@ -47,8 +42,8 @@ const verifInfo = (mail, pass) => {
         mailTrouve = true;
         if (membre.motDePasse === pass) {
           membre.connecte = true;
-          infoMsg.innerText = "Vous êtes connecté";
-          form.append(infoMsg);
+          infoMsg.classList.add("msg-succes");
+          infoMsg.innerHTML = "Vous êtes connecté";
 
           // stockage des infos user connecté dans une session
           sessionStorage.setItem("email", mail);
@@ -60,7 +55,7 @@ const verifInfo = (mail, pass) => {
 
           // redirection vers page selon role
           setTimeout(() => {
-            infoMsg.remove();
+            infoMsg.innerHTML = "";
             if (membre.role === "eleve") {
               location.href = "../pages/calendrier.html";
             } else {
@@ -68,17 +63,18 @@ const verifInfo = (mail, pass) => {
             }
           }, 2000);
         } else {
-          infoMsg.innerText = "Mot de passe incorrect";
-          form.append(infoMsg);
+          infoMsg.classList.add("msg-error");
+          infoMsg.innerHTML = "Mot de passe incorrect";
           if (infoMsg) {
-            inputPass.addEventListener("focus", () => infoMsg.remove());
+            inputPass.addEventListener("focus", () => (infoMsg.innerHTML = ""));
           }
         }
       } else if (!mailTrouve) {
-        infoMsg.innerText = "Email incorrect";
+        infoMsg.innerHTML = "Email incorrect";
+        infoMsg.classList.add("msg-error");
         form.append(infoMsg);
         if (infoMsg) {
-          inputEmail.addEventListener("focus", () => infoMsg.remove());
+          inputEmail.addEventListener("focus", () => (infoMsg.innerHTML = ""));
         }
       }
     });
@@ -90,15 +86,17 @@ if (btnConnexion) {
   btnConnexion.addEventListener("click", () => {
     const emailValue = inputEmail.value.trim();
     const passwordValue = inputPass.value.trim();
+
+    if (infoMsg) {
+      inputEmail.addEventListener("focus", () => (infoMsg.innerHTML = ""));
+      inputPass.addEventListener("focus", () => (infoMsg.innerHTML = ""));
+    }
+
     if (!emailValue || !passwordValue) {
-      console.error("Veuillez remplir tous les champs.");
-      form.append(infoMsg);
-      if (infoMsg) {
-        inputEmail.addEventListener("focus", () => infoMsg.remove());
-        inputPass.addEventListener("focus", () => infoMsg.remove());
-      }
+      infoMsg.innerHTML = "Veuillez remplir tous les champs.";
+      infoMsg.classList.add("msg-error");
     } else {
-      infoMsg.remove();
+      infoMsg.innerHTML = "";
       verifInfo(emailValue, passwordValue);
     }
   });
@@ -143,32 +141,42 @@ if (btnInscription) {
     const emailValue = inputEmail.value.trim();
     const passwordValue = inputPass.value.trim();
 
-    if (verifMail(emailValue)) {
-      if (verifMembre(emailValue)) {
-        infoMsg.innerText = "Cet email est déjà utilisé.";
-        form.append(infoMsg);
-      } else {
-        if (verifPass(passwordValue)) {
-          //ajout dans fausse bdd
-          let newMembre = new Membre(emailValue, passwordValue);
-          users.push(newMembre);
-          sessionStorage.setItem("users", JSON.stringify(users));
-          // msg info succes
-          infoMsg.innerText = "Vous êtes désormais inscrit.";
-          form.append(infoMsg);
-          // redirection sur la connexion
-          setTimeout(() => {
-            infoMsg.remove();
-            location.href = "../pages/connexion.html";
-          }, 2000);
-        } else {
-          infoMsg.innerText = "Le mot de passe ne remplit pas les conditions";
-          form.append(infoMsg);
-        }
-      }
+    if (infoMsg) {
+      inputEmail.addEventListener("focus", () => (infoMsg.innerHTML = ""));
+      inputPass.addEventListener("focus", () => (infoMsg.innerHTML = ""));
+    }
+
+    if (!emailValue || !passwordValue) {
+      infoMsg.innerHTML = "Veuillez remplir tous les champs.";
+      infoMsg.classList.add("msg-error");
     } else {
-      infoMsg.innerText = "Veuillez saisir un email.";
-      form.append(infoMsg);
+      if (verifMail(emailValue)) {
+        if (verifMembre(emailValue)) {
+          infoMsg.innerHTML = "Cet email est déjà utilisé.";
+          infoMsg.classList.add("msg-error");
+        } else {
+          if (verifPass(passwordValue)) {
+            //ajout dans fausse bdd
+            let newMembre = new Membre(emailValue, passwordValue);
+            users.push(newMembre);
+            sessionStorage.setItem("users", JSON.stringify(users));
+            // msg info succes
+            infoMsg.innerHTML = "Vous êtes désormais inscrit.";
+            infoMsg.classList.add("msg-succes");
+            // redirection sur la connexion
+            setTimeout(() => {
+              infoMsg.innerHTML = "";
+              location.href = "../pages/connexion.html";
+            }, 2000);
+          } else {
+            infoMsg.innerHTML = "Le mot de passe ne remplit pas les conditions";
+            infoMsg.classList.add("msg-error");
+          }
+        }
+      } else {
+        infoMsg.innerHTML = "Veuillez saisir un email @laplateforme.io.";
+        infoMsg.classList.add("msg-error");
+      }
     }
   });
 }
