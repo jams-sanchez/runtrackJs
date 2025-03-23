@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en" class="h-100 w-100">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,7 +20,7 @@
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <script id="afficheDemandes" type="text/x-handlebars-template">
       {{#each demandes}}
-        <div class="card w-auto" style="width: 18rem;">
+        <div class="card" style="width: 18rem;">
           <div class="card-header">
             <p class="mb-0">Présence le :</p>
             <h5>{{date}}</h5>
@@ -53,7 +53,7 @@
     </script>
     <link rel="stylesheet" href="../styles/style.css" />
   </head>
-  <body class="d-flex h-100 text-center text-bg-dark flex-column">
+  <body class="d-flex h-100 w-100 text-center text-bg-dark flex-column">
     <header class="mb-5">
       <nav
         class="navbar navbar-expand-lg navbar-dark bg-dark"
@@ -112,9 +112,9 @@
     </header>
     <main>
       <div
-        class="card-body d-flex justify-content-start align-items-center flex-column">
+        class="card-body d-flex justify-content-start align-items-center flex-column mb-5">
         <h2 class="mb-5">Elèves souhaitant venir à l'école</h2>
-        <div id="mod" class="row gap-3 justify-content-center">
+        <div id="mod" class="d-flex gap-3 justify-content-center flex-wrap">
           <!--  -->
           <!--  -->
           <!--  -->
@@ -124,7 +124,48 @@
         </div>
         <p id="msg"></p>
       </div>
+      <div id="adminSection" class="p-5 text-bg-light d-flex flex-column gap-5">
+        <!-- mod -->
+        <div
+          class="mod card-body d-flex justify-content-start gap-2 align-items-center flex-column">
+          <div class="d-flex gap-5">
+            <h5>Liste des modérateurs:</h5>
+            <button
+              id="AjouterMod"
+              type="submit"
+              class="btn btn-success btn-sm">
+              Ajouter
+            </button>
+          </div>
+          <div
+            id="afficheMod"
+            class="d-flex gap-3 justify-content-center flex-wrap"></div>
+        </div>
+        <!-- admin -->
+        <div
+          class="admin card-body d-flex justify-content-start gap-2 align-items-center flex-column">
+          <div class="d-flex gap-5">
+            <h5>Liste des administrateurs:</h5>
+            <button
+              id="AjouterAdmin"
+              type="submit"
+              class="btn btn-success btn-sm">
+              Ajouter
+            </button>
+          </div>
+          <div
+            id="afficheAdmin"
+            class="d-flex gap-3 justify-content-center flex-wrap"></div>
+        </div>
+      </div>
     </main>
-    <footer></footer>
+    <footer class="mt-5 text-secondary mx-auto">
+      <div
+        class="d-flex flex-column flex-sm-row gap-2 gap-sm-5 justify-content-center align-items-center">
+        <p class="mb-0">contact@laplateforme.io</p>
+        <p class="mb-0">8 rue d'Hozier 13002 Marseille</p>
+        <p class="mb-0">04.84.89.43.69</p>
+      </div>
+    </footer>
   </body>
 </html>

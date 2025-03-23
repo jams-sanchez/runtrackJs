@@ -1,31 +1,37 @@
 let users = JSON.parse(sessionStorage.getItem("users"));
 let demandes = JSON.parse(sessionStorage.getItem("demandes"));
 
-// SAUVEGARDE: Infos du membre connecté en session
-// const emailConnecte = sessionStorage.getItem("email");
-// const nomConnecte = sessionStorage.getItem("nom");
-// const roleConnecte = sessionStorage.getItem("role");
+// BACKOFFICE: affichage des elements page backoffice
+if (roleConnecte && roleConnecte === "moderateur") {
+  if (adminSection) {
+    adminSection.style.display = "none";
+  }
+}
 
 // ELEMENTS:
 const infoMsg = document.getElementById("msg");
 const adminSection = document.getElementById("adminSection");
+const afficheMod = document.getElementById("afficheMod");
+const afficheAdmin = document.getElementById("afficheAdmin");
+// console.log(afficheAdmin);
+// console.log(afficheMod);
 
-// HANDLEBARS template pour les demandes de présence
+// HANDLEBARS template d'affichage des demandes de présence
 
 const handleDemande = () => {
   let listeDemande = {
     demandes: [],
   };
 
-  if (listeDemande.demandes.length !== 0) {
-    if (demandes) {
-      demandes.forEach((demande) => {
-        if (demande.statut === "en attente") {
-          listeDemande.demandes.push(demande);
-        }
-      });
-    }
-  } else {
+  if (demandes) {
+    demandes.forEach((demande) => {
+      if (demande.statut === "en attente") {
+        listeDemande.demandes.push(demande);
+      }
+    });
+  }
+
+  if (listeDemande.demandes.length === 0) {
     infoMsg.innerHTML = "Plus de demandes en attente";
     infoMsg.classList.add("msg-info");
   }
@@ -39,12 +45,64 @@ const handleDemande = () => {
   afficheDemandes.innerHTML = compiledHTMLDemande;
 };
 
-// BACKOFFICE: affichage des elements page backoffice
-// if (roleConnecte && roleConnecte === "moderateur") {
-//   if (adminSection) {
-//     adminSection.style.display = "none";
-//   }
-// }
+// WITHOUT Handlebars
+const afficheModAdmin = () => {
+  let listeMod = {
+    moderateur: [],
+  };
+
+  let listeAdmin = {
+    admin: [],
+  };
+
+  if (users) {
+    users.forEach((user) => {
+      if (user.role === "moderateur") {
+        listeMod.moderateur.push(user);
+      } else if (user.role === "admin") {
+        listeAdmin.admin.push(user);
+      }
+    });
+  }
+
+  // affichage liste des moderateurs
+  if (listeMod.moderateur.length > 0) {
+    afficheMod.innerHTML = "";
+    listeMod.moderateur.forEach((mod) => {
+      afficheMod.innerHTML += `
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        <h5>${mod.email}</h5>
+      </div>
+      <div class="card-body">
+        <button id="SupprimerMod" value="${mod.id}" type="submit" class="btn btn-danger btn-sm">
+            Supprimer
+        </button>
+      </div>
+    </div>
+    `;
+    });
+  }
+
+  // affichage liste des admins
+  if (listeAdmin.admin.length > 0) {
+    afficheAdmin.innerHTML = "";
+    listeAdmin.admin.forEach((admin) => {
+      afficheAdmin.innerHTML += `
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        <h5>${admin.email}</h5>
+      </div>
+      <div class="card-body">
+        <button id="SupprimerAdmin" value="${admin.id}" type="submit" class="btn btn-danger btn-sm">
+            Supprimer
+        </button>
+      </div>
+    </div>
+    `;
+    });
+  }
+};
 
 // METHODE gestion données
 
@@ -99,4 +157,5 @@ const evenementsBtn = () => {
 };
 
 handleDemande();
+afficheModAdmin();
 evenementsBtn();
