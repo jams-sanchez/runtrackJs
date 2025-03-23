@@ -55,9 +55,6 @@ let fullDateSelected;
 // console.log(jourActuel);
 
 // CREATION CALENDRIER
-const getJoursDansMois = (month, year) => {
-  return new Date(year, month, 0).getDate();
-};
 
 const createCalendrier = (month, year) => {
   calendrier.innerHTML = "";
@@ -65,7 +62,8 @@ const createCalendrier = (month, year) => {
   listeJours.innerHTML = "";
 
   let date = 1;
-  const joursDansMois = getJoursDansMois(month + 1, year);
+  const premierJour = (new Date(year, month, 1).getDay() + 6) % 7;
+  const joursDansMois = new Date(year, month + 1, 0).getDate();
 
   // affichage du mois
   moisNom.innerHTML = mois[month];
@@ -81,11 +79,8 @@ const createCalendrier = (month, year) => {
   for (let i = 0; i < 6; i++) {
     let semaine = document.createElement("tr");
 
-    for (let j = 1; j < 8; j++) {
-      if (
-        (i === 0 && j < new Date(year, month, 1).getDay()) ||
-        date > joursDansMois
-      ) {
+    for (let j = 0; j < 7; j++) {
+      if ((i === 0 && j < premierJour) || date > joursDansMois) {
         let jourNum = document.createElement("td");
         semaine.appendChild(jourNum);
       } else {
@@ -97,8 +92,8 @@ const createCalendrier = (month, year) => {
         // style
 
         if (
+          j == 5 ||
           j == 6 ||
-          j == 7 ||
           (date <= jourActuel.getDate() && month === jourActuel.getMonth()) ||
           month < jourActuel.getMonth()
         ) {
@@ -235,6 +230,7 @@ apres.addEventListener("click", () => {
 let dateClique;
 calendrier.addEventListener("click", (e) => {
   let select = e.target;
+
   let selectDate = parseInt(select.innerHTML);
   let jourSelect = getJourSemaine(selectDate, moisPage);
 
@@ -255,8 +251,10 @@ calendrier.addEventListener("click", (e) => {
       fullDateSelected = "";
       choixBtn.style.visibility = "hidden";
       console.log("Date passé ou weekend");
+      console.log(fullDateSelected);
     } else {
       fullDateSelected = getFullDate(selectDate, moisPage);
+      console.log(fullDateSelected);
       const dateExiste = verifDate(fullDateSelected);
 
       if (!dateExiste) {
@@ -288,4 +286,5 @@ choixBtn.addEventListener("click", () => {
 // console.log(moisNom.innerHTML);
 
 createCalendrier(jourActuel.getMonth(), jourActuel.getFullYear());
+// createCalendrier(2025, 5);
 afficheDate();
