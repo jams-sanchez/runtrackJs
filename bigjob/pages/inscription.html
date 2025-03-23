@@ -16,6 +16,7 @@
       defer></script>
     <link rel="stylesheet" href="../styles/form.css" />
     <link rel="stylesheet" href="../styles/style.css" />
+    <script src="../js/scriptNav.js" defer></script>
     <script src="../js/User.js" defer></script>
     <script src="../js/scriptCoIn.js" defer></script>
     <title>Inscription</title>
@@ -54,22 +55,25 @@
                     >Accueil</a
                   >
                 </li>
-                <li class="nav-item">
+                <li id="navIns" class="nav-item">
                   <a class="nav-link active" href="../pages/inscription.html"
                     >Inscription</a
                   >
                 </li>
-                <li class="nav-item">
+                <li id="navCo" class="nav-item">
                   <a class="nav-link" href="../pages/connexion.html"
                     >Connexion</a
                   >
                 </li>
-                <li class="nav-item">
+                <li id="navDeco" class="nav-item">
+                  <a class="nav-link" href="../index.html">Deconnexion</a>
+                </li>
+                <li id="navAdmin" class="nav-item">
                   <a class="nav-link" href="../pages/backoffice.html"
                     >BackOffice</a
                   >
                 </li>
-                <li class="nav-item">
+                <li id="navCal" class="nav-item">
                   <a class="nav-link" href="../pages/calendrier.html"
                     >Calendrier</a
                   >
@@ -81,8 +85,10 @@
       </header>
       <main class="px-3">
         <form class="form-signin w-100 m-auto text-black">
-          <h1 class="h3 mb-5 text-center text-white">Inscription</h1>
-
+          <h1 class="h3 mb-4 text-center text-white">Inscription</h1>
+          <div class="d-block mb-5">
+            <img width="40rem" src="../assets/img/smiley.png" />
+          </div>
           <div class="form-floating">
             <input
               type="email"

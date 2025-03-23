@@ -15,14 +15,14 @@
       crossorigin="anonymous"
       defer></script>
     <link rel="stylesheet" href="../styles/style.css" />
-    <!-- <link rel="stylesheet" href="../styles/form.css" /> -->
+    <script src="../js/scriptNav.js" defer></script>
     <script src="../js/Demande.js" defer></script>
     <script src="../js/scriptCalendrier.js" defer></script>
     <title>Calendrier</title>
   </head>
   <body class="d-flex h-100 text-center text-bg-dark flex-column">
     <div class="cover-container d-flex w-100 h-100 pt-3 mx-auto flex-column">
-      <header class="mb-auto">
+      <header class="mb-5">
         <nav
           class="navbar navbar-expand-lg navbar-dark bg-dark"
           aria-label="Eighth navbar example">
@@ -54,22 +54,25 @@
                     >Accueil</a
                   >
                 </li>
-                <li class="nav-item">
+                <li id="navIns" class="nav-item">
                   <a class="nav-link" href="../pages/inscription.html"
                     >Inscription</a
                   >
                 </li>
-                <li class="nav-item">
+                <li id="navCo" class="nav-item">
                   <a class="nav-link" href="../pages/connexion.html"
                     >Connexion</a
                   >
                 </li>
-                <li class="nav-item">
+                <li id="navDeco" class="nav-item">
+                  <a class="nav-link" href="../index.html">Deconnexion</a>
+                </li>
+                <li id="navAdmin" class="nav-item">
                   <a class="nav-link" href="../pages/backoffice.html"
                     >BackOffice</a
                   >
                 </li>
-                <li class="nav-item">
+                <li id="navCal" class="nav-item">
                   <a class="nav-link active" href="../pages/calendrier.html"
                     >Calendrier</a
                   >
@@ -84,12 +87,12 @@
         <div class="boite-calendrier m-auto">
           <div
             class="d-flex gap-5 mb-3 fs-4 align-items-center justify-content-center">
-            <p id="avant" class="mb-0">◄</p>
-            <p id="moisNom" class="fs-3 mb-0"></p>
-            <p id="apres" class="mb-0">►</p>
+            <p id="avant" class="avant mb-0">◄</p>
+            <p id="moisNom" class="text-uppercase fw-bold fs-3 mb-0"></p>
+            <p id="apres" class="apres mb-0">►</p>
           </div>
           <!-- <div id="jour-nom"></div> -->
-          <table id="calendrier" class="calendrier m-auto">
+          <table id="calendrier" class="calendrier w-100">
             <!-- nom des jours -->
             <thead>
               <tr id="jour-nom"></tr>
@@ -98,15 +101,17 @@
             <tbody id="jour"></tbody>
           </table>
           <div
-            class="d-flex gap-5 w-100 m-auto justify-content-center text-center align-items-center">
-            <p class="legend mb-0"><span class="red">●</span> validé</p>
+            class="banhead d-flex text-secondary gap-5 w-100 m-auto justify-content-evenly text-center align-items-center">
+            <p class="legend mb-0"><span class="red">●</span> accepté</p>
             <p class="legend mb-0"><span class="orange">●</span> en attente</p>
-            <p class="legend mb-0"><span class="green">●</span> annulé</p>
+            <p class="legend mb-0">
+              <span class="green">●</span> annulé / refusé
+            </p>
           </div>
           <div>
             <button
               id="choix-date"
-              class="btn btn-primary px-4 btn-lg mb-4 mx-2"
+              class="btn btn-primary px-4 btn-lg"
               type="submit">
               Choisir cette date
             </button>

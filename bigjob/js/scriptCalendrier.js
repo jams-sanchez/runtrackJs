@@ -1,6 +1,11 @@
 users = JSON.parse(sessionStorage.getItem("users"));
 let demandes = JSON.parse(sessionStorage.getItem("demandes"));
 
+// SAUVEGARDE: Infos du membre connecté en session
+// const emailConnecte = sessionStorage.getItem("email");
+// const nomConnecte = sessionStorage.getItem("nom");
+// const roleConnecte = sessionStorage.getItem("role");
+
 // elements
 const avant = document.getElementById("avant");
 const apres = document.getElementById("apres");
@@ -8,10 +13,10 @@ const calendrier = document.getElementById("jour");
 const moisNom = document.getElementById("moisNom");
 const listeJours = document.getElementById("jour-nom");
 const choixBtn = document.getElementById("choix-date");
+const infoMsg = document.getElementById("msg");
 
-// empêche le bouton d'actualiser la page
+// cache le bouton
 if (choixBtn) {
-  choixBtn.addEventListener("submit", (e) => e.preventDefault());
   choixBtn.style.visibility = "hidden";
 }
 
@@ -50,9 +55,6 @@ let fullDateSelected;
 // console.log(jourActuel);
 
 // CREATION CALENDRIER
-const getJoursDansMois = (month, year) => {
-  return new Date(year, month, 0).getDate();
-};
 
 const createCalendrier = (month, year) => {
   calendrier.innerHTML = "";
@@ -60,14 +62,15 @@ const createCalendrier = (month, year) => {
   listeJours.innerHTML = "";
 
   let date = 1;
-  const joursDansMois = getJoursDansMois(month + 1, year);
+  const premierJour = (new Date(year, month, 1).getDay() + 6) % 7;
+  const joursDansMois = new Date(year, month + 1, 0).getDate();
 
   // affichage du mois
   moisNom.innerHTML = mois[month];
 
   // affichage des noms des jours
   jours.forEach((jour) => {
-    let jourText = document.createElement("th");
+    let jourText = document.createElement("td");
     jourText.innerHTML = jour.slice(0, 3);
     listeJours.appendChild(jourText);
   });
@@ -76,11 +79,8 @@ const createCalendrier = (month, year) => {
   for (let i = 0; i < 6; i++) {
     let semaine = document.createElement("tr");
 
-    for (let j = 1; j < 8; j++) {
-      if (
-        (i === 0 && j < new Date(year, month, 1).getDay()) ||
-        date > joursDansMois
-      ) {
+    for (let j = 0; j < 7; j++) {
+      if ((i === 0 && j < premierJour) || date > joursDansMois) {
         let jourNum = document.createElement("td");
         semaine.appendChild(jourNum);
       } else {
@@ -92,8 +92,8 @@ const createCalendrier = (month, year) => {
         // style
 
         if (
+          j == 5 ||
           j == 6 ||
-          j == 7 ||
           (date <= jourActuel.getDate() && month === jourActuel.getMonth()) ||
           month < jourActuel.getMonth()
         ) {
@@ -138,7 +138,7 @@ const verifDate = (demandeDate) => {
   let count = 0;
   if (demandes) {
     demandes.forEach((demande) => {
-      if (demande.eleve === sessionStorage.getItem("email")) {
+      if (demande.eleve === emailConnecte) {
         if (demandeDate === demande.date) {
           count++;
         }
@@ -156,13 +156,10 @@ const verifDate = (demandeDate) => {
 const afficheDate = () => {
   if (demandes) {
     let dateCase = document.getElementsByTagName("td");
-    console.log(demandes);
 
     demandes.forEach((demande) => {
-      if (demande.eleve === sessionStorage.getItem("email")) {
-        console.log(demande.date);
+      if (demande.eleve === emailConnecte) {
         let recupDate = demande.date.split("-");
-        console.log(recupDate);
         let date = [];
         recupDate.forEach((item) => date.push(parseInt(item)));
         if (moisPage === date[1] - 1) {
@@ -173,7 +170,10 @@ const afficheDate = () => {
                 td.style.cursor = "default";
               }
             });
-          } else if (demande.statut === "annulé") {
+          } else if (
+            demande.statut === "annulé" ||
+            demande.statut === "refusé"
+          ) {
             Array.from(dateCase).forEach((td) => {
               if (td.textContent === date[0].toString()) {
                 td.style.backgroundColor = "rgba(255, 0, 0, 0.842)";
@@ -230,6 +230,7 @@ apres.addEventListener("click", () => {
 let dateClique;
 calendrier.addEventListener("click", (e) => {
   let select = e.target;
+
   let selectDate = parseInt(select.innerHTML);
   let jourSelect = getJourSemaine(selectDate, moisPage);
 
@@ -247,12 +248,13 @@ calendrier.addEventListener("click", (e) => {
       jourSelect === "samedi" ||
       jourSelect === "dimanche"
     ) {
-      // => definir message d'erreur <=
       fullDateSelected = "";
       choixBtn.style.visibility = "hidden";
       console.log("Date passé ou weekend");
+      console.log(fullDateSelected);
     } else {
       fullDateSelected = getFullDate(selectDate, moisPage);
+      console.log(fullDateSelected);
       const dateExiste = verifDate(fullDateSelected);
 
       if (!dateExiste) {
@@ -260,8 +262,6 @@ calendrier.addEventListener("click", (e) => {
         select.style.backgroundColor = "white";
         select.style.color = "black";
         dateClique = select;
-      } else {
-        // message info : affiche statut de la demande
       }
     }
   }
@@ -269,7 +269,7 @@ calendrier.addEventListener("click", (e) => {
 
 // EVENEMENT : ajout demande de date
 choixBtn.addEventListener("click", () => {
-  const demandeEleve = sessionStorage.getItem("email");
+  const demandeEleve = emailConnecte;
 
   const dateExiste = verifDate(fullDateSelected);
   if (!dateExiste) {
@@ -277,6 +277,7 @@ choixBtn.addEventListener("click", () => {
     afficheDate();
     dateClique.style.color = "white";
     dateClique = "";
+    choixBtn.style.visibility = "hidden";
   } else {
     console.log("essayer une autre date");
   }
@@ -286,4 +287,5 @@ choixBtn.addEventListener("click", () => {
 // console.log(moisNom.innerHTML);
 
 createCalendrier(jourActuel.getMonth(), jourActuel.getFullYear());
+// createCalendrier(2025, 5);
 afficheDate();

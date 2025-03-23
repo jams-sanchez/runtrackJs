@@ -39,9 +39,18 @@
     width: 30%;
 }
 
+.avant,
+.apres {
+    color: #0062FF;
+    cursor: pointer;
+}
+
+.calendrier thead,
+.banhead {
+    background-color: rgb(48, 48, 48);
+}
+
 .calendrier {
-    width: 100%;
-    max-width: 30rem;
     height: auto;
     table-layout: fixed;
     aspect-ratio: 1 / 1;
@@ -53,10 +62,6 @@
     height: 4%;
     width: 4%;
     aspect-ratio: 1 / 1;
-}
-
-.legend {
-    width: 20%;
 }
 
 .green {
