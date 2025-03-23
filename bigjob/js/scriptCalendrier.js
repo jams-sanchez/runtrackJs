@@ -15,9 +15,8 @@ const listeJours = document.getElementById("jour-nom");
 const choixBtn = document.getElementById("choix-date");
 const infoMsg = document.getElementById("msg");
 
-// empêche le bouton d'actualiser la page
+// cache le bouton
 if (choixBtn) {
-  choixBtn.addEventListener("submit", (e) => e.preventDefault());
   choixBtn.style.visibility = "hidden";
 }
 
@@ -176,7 +175,10 @@ const afficheDate = () => {
                 td.style.cursor = "default";
               }
             });
-          } else if (demande.statut === "annulé") {
+          } else if (
+            demande.statut === "annulé" ||
+            demande.statut === "refusé"
+          ) {
             Array.from(dateCase).forEach((td) => {
               if (td.textContent === date[0].toString()) {
                 td.style.backgroundColor = "rgba(255, 0, 0, 0.842)";

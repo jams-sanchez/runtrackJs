@@ -13,7 +13,7 @@ const getJson = async () => {
 };
 
 // JSON: sépare les données (users et demandes)
-if (!sessionStorage.getItem("users") && !sessionStorage.getItem("demandes")) {
+if (!sessionStorage.getItem("users") || !sessionStorage.getItem("demandes")) {
   getJson().then((infos) => {
     users = infos.membres;
     demandes = infos.requetes;

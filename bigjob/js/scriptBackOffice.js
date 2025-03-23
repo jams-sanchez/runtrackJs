@@ -6,6 +6,30 @@ const emailConnecte = sessionStorage.getItem("email");
 const nomConnecte = sessionStorage.getItem("nom");
 const roleConnecte = sessionStorage.getItem("role");
 
+// HANDLEBARS template pour les demandes de présence
+
+const handleDemande = () => {
+  let listeDemande = {
+    demandes: [],
+  };
+
+  if (demandes) {
+    demandes.forEach((demande) => {
+      if (demande.statut === "en attente") {
+        listeDemande.demandes.push(demande);
+      }
+    });
+  }
+
+  const afficheListeDemandes =
+    document.getElementById("afficheDemandes").innerHTML;
+  const templateDemande = Handlebars.compile(afficheListeDemandes);
+
+  const compiledHTMLDemande = templateDemande(listeDemande);
+  const afficheDemandes = document.getElementById("mod");
+  afficheDemandes.innerHTML = compiledHTMLDemande;
+};
+
 // ELEMENTS:
 const adminSection = document.getElementById("adminSection");
 
@@ -16,23 +40,57 @@ if (roleConnecte && roleConnecte === "moderateur") {
   }
 }
 
-// handlebar template pour les demandes de présence
-let listeDemande = {
-  demandes: [],
-};
+// METHODE gestion données
 
-if (demandes) {
+const validerDate = (id) => {
+  // mise a jour du statut (voir pour si date passé)
   demandes.forEach((demande) => {
-    if (demande.statut === "en attente") {
-      listeDemande.demandes.push(demande);
+    if (demande.id === id) {
+      demande.statut = "accepté";
     }
   });
-}
 
-const afficheListeDemandes =
-  document.getElementById("afficheDemandes").innerHTML;
-const templateDemande = Handlebars.compile(afficheListeDemandes);
+  sessionStorage.setItem("demandes", JSON.stringify(demandes));
+};
 
-const compiledHTMLDemande = templateDemande(listeDemande);
-const afficheDemandes = document.getElementById("mod");
-afficheDemandes.innerHTML = compiledHTMLDemande;
+const refuserDate = (id) => {
+  // mise a jour du statut (voir pour si date passé)
+  demandes.forEach((demande) => {
+    if (demande.id === id) {
+      demande.statut = "refusé";
+    }
+  });
+
+  sessionStorage.setItem("demandes", JSON.stringify(demandes));
+};
+
+// GESTION evenements : demandes
+
+const evenementsBtn = () => {
+  // élements boutons
+  const btnAccepter = document.querySelectorAll("#accepter");
+  const btnRefuser = document.querySelectorAll("#refuser");
+
+  // événement sur chaque bouton valider
+  btnAccepter.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const valueBtn = parseInt(btn.value);
+      validerDate(valueBtn);
+      handleDemande();
+      evenementsBtn();
+    });
+  });
+
+  // événement sur chaque bouton refuser
+  btnRefuser.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const valueBtn = parseInt(btn.value);
+      refuserDate(valueBtn);
+      handleDemande();
+      evenementsBtn();
+    });
+  });
+};
+
+handleDemande();
+evenementsBtn();

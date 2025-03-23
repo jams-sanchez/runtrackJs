@@ -14,6 +14,8 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
       defer></script>
+    <script src="../js/scriptBackOffice.js" defer></script>
+    <title>BackOffice</title>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <script id="afficheDemandes" type="text/x-handlebars-template">
       {{#each demandes}}
@@ -28,12 +30,18 @@
             <div id="btn-affiche">
               <button
                 id="accepter"
+                value="{{id}}"
                 type="submit"
                 class="btn btn-success btn-sm"
               >
                 Accepter
               </button>
-              <button id="refuser" type="submit" class="btn btn-danger btn-sm">
+              <button
+                id="refuser"
+                value="{{id}}"
+                type="submit"
+                class="btn btn-danger btn-sm"
+              >
                 Refuser
               </button>
             </div>
@@ -43,8 +51,6 @@
       {{/each}}
     </script>
     <link rel="stylesheet" href="../styles/style.css" />
-    <script src="../js/scriptBackOffice.js" defer></script>
-    <title>BackOffice</title>
   </head>
   <body class="d-flex h-100 text-center text-bg-dark flex-column">
     <header class="mb-5">
@@ -103,7 +109,7 @@
     <main>
       <div
         class="card-body d-flex justify-content-start align-items-center flex-column">
-        <h2 class="mb-5">Personne souhaitant venir à l'école</h2>
+        <h2 class="mb-5">Elèves souhaitant venir à l'école</h2>
         <div id="mod" class="row gap-3 justify-content-center">
           <!--  -->
           <!--  -->
