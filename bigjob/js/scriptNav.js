@@ -26,9 +26,15 @@ if (emailConnecte) {
 
 if (emailConnecte) {
   navDeco.addEventListener("click", () => {
-    sessionStorage.removeItem("email");
-    sessionStorage.removeItem("role");
-    sessionStorage.removeItem("nom");
-    location.href = "../index.html";
+    users.forEach((user) => {
+      if (user.email === emailConnecte && user.connecte === true) {
+        user.connecte = false;
+        sessionStorage.setItem("users", JSON.stringify(users));
+        sessionStorage.removeItem("email");
+        sessionStorage.removeItem("role");
+        sessionStorage.removeItem("nom");
+        location.href = "../index.html";
+      }
+    });
   });
 }

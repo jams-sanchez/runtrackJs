@@ -29,6 +29,8 @@ const verifInfo = (mail, pass) => {
         mailTrouve = true;
         if (membre.motDePasse === pass) {
           membre.connecte = true;
+          sessionStorage.setItem("users", JSON.stringify(users));
+          console.log(users);
           infoMsg.classList.add("msg-succes");
           infoMsg.innerHTML = "Vous êtes connecté";
 
