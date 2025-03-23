@@ -122,20 +122,55 @@
           <!--  -->
           <!--  -->
         </div>
-        <p id="msg"></p>
       </div>
-      <div id="adminSection" class="p-5 text-bg-light d-flex flex-column gap-5">
+      <div id="adminSection" class="pt-5 pb-5 d-flex flex-column gap-1">
+        <div class="m-auto" style="min-width: 10rem">
+          <button
+            id="ajouter"
+            type="submit"
+            class="btn btn-primary btn-sm w-100">
+            Ajouter
+          </button>
+        </div>
+        <div id="ajoutRole">
+          <form
+            class="my-3 pb-4 form-control m-auto d-flex flex-column gap-3"
+            style="max-width: 20rem">
+            <div
+              class="d-flex p-2 justify-content-between align-content-center">
+              <h5 class="mb-0 ms-2 text-primary text-uppercase">Ajouter</h5>
+              <button
+                id="annuler"
+                type="button"
+                class="p-1 btn-close align-items-center"></button>
+            </div>
+
+            <input
+              type="text"
+              name="name"
+              id="emailRole"
+              class="text-center"
+              placeholder="Email" />
+            <select name="type" id="type" class="text-center">
+              <option>--Choisir un role--</option>
+              <option>moderateur</option>
+              <option>admin</option>
+            </select>
+            <button
+              type="submit"
+              id="envoyer"
+              class="btn btn-primary btn-sm w-100">
+              Envoyer
+            </button>
+            <p id="msg" class="mb-0"></p>
+          </form>
+        </div>
+
         <!-- mod -->
         <div
-          class="mod card-body d-flex justify-content-start gap-2 align-items-center flex-column">
+          class="mod card-body d-flex py-4 justify-content-start gap-4 align-items-center flex-column">
           <div class="d-flex gap-5">
             <h5>Liste des modérateurs:</h5>
-            <button
-              id="AjouterMod"
-              type="submit"
-              class="btn btn-success btn-sm">
-              Ajouter
-            </button>
           </div>
           <div
             id="afficheMod"
@@ -143,15 +178,9 @@
         </div>
         <!-- admin -->
         <div
-          class="admin card-body d-flex justify-content-start gap-2 align-items-center flex-column">
+          class="admin card-body d-flex py-4 justify-content-start gap-4 align-items-center flex-column">
           <div class="d-flex gap-5">
             <h5>Liste des administrateurs:</h5>
-            <button
-              id="AjouterAdmin"
-              type="submit"
-              class="btn btn-success btn-sm">
-              Ajouter
-            </button>
           </div>
           <div
             id="afficheAdmin"
