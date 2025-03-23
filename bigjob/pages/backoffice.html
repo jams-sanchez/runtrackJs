@@ -14,6 +14,7 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
       defer></script>
+    <script src="../js/scriptNav.js" defer></script>
     <script src="../js/scriptBackOffice.js" defer></script>
     <title>BackOffice</title>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
@@ -83,20 +84,23 @@
                   >Accueil</a
                 >
               </li>
-              <li class="nav-item">
+              <li id="navIns" class="nav-item">
                 <a class="nav-link" href="../pages/inscription.html"
                   >Inscription</a
                 >
               </li>
-              <li class="nav-item">
+              <li id="navCo" class="nav-item">
                 <a class="nav-link" href="../pages/connexion.html">Connexion</a>
               </li>
-              <li class="nav-item">
+              <li id="navDeco" class="nav-item">
+                <a class="nav-link" href="../index.html">Deconnexion</a>
+              </li>
+              <li id="navAdmin" class="nav-item">
                 <a class="nav-link active" href="../pages/backoffice.html"
                   >BackOffice</a
                 >
               </li>
-              <li class="nav-item">
+              <li id="navCal" class="nav-item">
                 <a class="nav-link" href="../pages/calendrier.html"
                   >Calendrier</a
                 >
@@ -118,6 +122,7 @@
           <!--  -->
           <!--  -->
         </div>
+        <p id="msg"></p>
       </div>
     </main>
     <footer></footer>

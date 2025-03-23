@@ -2,9 +2,9 @@ users = JSON.parse(sessionStorage.getItem("users"));
 let demandes = JSON.parse(sessionStorage.getItem("demandes"));
 
 // SAUVEGARDE: Infos du membre connecté en session
-const emailConnecte = sessionStorage.getItem("email");
-const nomConnecte = sessionStorage.getItem("nom");
-const roleConnecte = sessionStorage.getItem("role");
+// const emailConnecte = sessionStorage.getItem("email");
+// const nomConnecte = sessionStorage.getItem("nom");
+// const roleConnecte = sessionStorage.getItem("role");
 
 // elements
 const avant = document.getElementById("avant");
