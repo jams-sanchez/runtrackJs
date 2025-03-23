@@ -1,6 +1,11 @@
 users = JSON.parse(sessionStorage.getItem("users"));
 let demandes = JSON.parse(sessionStorage.getItem("demandes"));
 
+// SAUVEGARDE: Infos du membre connecté en session
+const emailConnecte = sessionStorage.getItem("email");
+const nomConnecte = sessionStorage.getItem("nom");
+const roleConnecte = sessionStorage.getItem("role");
+
 // elements
 const avant = document.getElementById("avant");
 const apres = document.getElementById("apres");
@@ -139,7 +144,7 @@ const verifDate = (demandeDate) => {
   let count = 0;
   if (demandes) {
     demandes.forEach((demande) => {
-      if (demande.eleve === sessionStorage.getItem("email")) {
+      if (demande.eleve === emailConnecte) {
         if (demandeDate === demande.date) {
           count++;
         }
@@ -159,7 +164,7 @@ const afficheDate = () => {
     let dateCase = document.getElementsByTagName("td");
 
     demandes.forEach((demande) => {
-      if (demande.eleve === sessionStorage.getItem("email")) {
+      if (demande.eleve === emailConnecte) {
         let recupDate = demande.date.split("-");
         let date = [];
         recupDate.forEach((item) => date.push(parseInt(item)));
@@ -264,7 +269,7 @@ calendrier.addEventListener("click", (e) => {
 
 // EVENEMENT : ajout demande de date
 choixBtn.addEventListener("click", () => {
-  const demandeEleve = sessionStorage.getItem("email");
+  const demandeEleve = emailConnecte;
 
   const dateExiste = verifDate(fullDateSelected);
   if (!dateExiste) {

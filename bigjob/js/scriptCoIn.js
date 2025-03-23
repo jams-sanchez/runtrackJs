@@ -1,32 +1,22 @@
 let users = JSON.parse(sessionStorage.getItem("users"));
 let demandes = JSON.parse(sessionStorage.getItem("demandes"));
 
+// SAUVEGARDE: Infos du membre connecté en session
+const email = sessionStorage.getItem("email");
+const nom = sessionStorage.getItem("nom");
+const role = sessionStorage.getItem("role");
+
 // ELEMENTS:
-// connexion / inscription
 const form = document.querySelector("form");
 const btnConnexion = document.getElementById("connexion");
 const btnInscription = document.getElementById("inscription");
 const inputEmail = document.getElementById("email");
 const inputPass = document.getElementById("motDePasse");
 const infoMsg = document.getElementById("msg");
-// backoffice
-const adminSection = document.getElementById("adminSection");
 
 // empêche les boutons d'un formulaire d'actualiser la page
 if (form) {
   form.addEventListener("submit", (e) => e.preventDefault());
-}
-
-// SAUVEGARDE: Infos du membre connecté en session
-const email = sessionStorage.getItem("email");
-const nom = sessionStorage.getItem("nom");
-const role = sessionStorage.getItem("role");
-
-// BACKOFFICE: affichage des elements page backoffice
-if (role && role === "moderateur") {
-  if (adminSection) {
-    adminSection.style.display = "none";
-  }
 }
 
 // CONNEXION: vérifie le mail et mot de passe
