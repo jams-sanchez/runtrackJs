@@ -1,11 +1,8 @@
 let users = JSON.parse(sessionStorage.getItem("users"));
 let demandes = JSON.parse(sessionStorage.getItem("demandes"));
 
-const listeRole = ["moderateur", "admin"];
-
 // ELEMENTS:
 const infoMsg = document.getElementById("msg");
-infoMsg.style.display = "none";
 const adminSection = document.getElementById("adminSection");
 const afficheMod = document.getElementById("afficheMod");
 const afficheAdmin = document.getElementById("afficheAdmin");
@@ -14,23 +11,33 @@ const form = document.querySelector("form");
 const btnAjouter = document.querySelector("#ajouter");
 const btnEnvoyer = document.querySelector("#envoyer");
 const btnAnnuler = document.querySelector("#annuler");
+const btnAnnulerDemandes = document.querySelector("#annulerDemandes");
 const inputEmail = document.querySelector("#emailRole");
 const inputType = document.querySelector("#type");
-// const selectRole = document.querySelector("#selectRole")
-// console.log(inputEmail);
-// console.log(inputType);
+const selectRole = document.querySelector("#selectRole");
 
+// VARIABLES
+const listeRole = ["moderateur", "admin"];
+if (inputType) {
+  listeRole.forEach((type) => {
+    let option = document.createElement("option");
+    option.textContent = type;
+    inputType.appendChild(option);
+  });
+}
+
+// CONDITIONS SIMPLE
 if (ajoutRole) {
   ajoutRole.style.display = "none";
 }
 
-// empêche les boutons d'un formulaire d'actualiser la page
 if (form) {
   form.addEventListener("submit", (e) => e.preventDefault());
 }
 
 // AFFICHAGE - Handlebars : template d'affichage des demandes de présence
 const handleDemande = () => {
+  const afficheDemandes = document.getElementById("mod");
   let listeDemande = {
     demandes: [],
   };
@@ -44,17 +51,22 @@ const handleDemande = () => {
   }
 
   if (listeDemande.demandes.length === 0) {
-    infoMsg.innerHTML = "Plus de demandes en attente";
-    infoMsg.classList.add("msg-info");
+    afficheDemandes.innerHTML = `
+    <div class="d-flex flex-column gap-2">
+      <p class="msg-info mb-0">Plus de demandes en attente.</p>
+      <div class="d-block">
+          <img width="40rem" src="../assets/img/smiley.png" />
+      </div>
+    </div>
+    `;
+    btnAnnulerDemandes.style.visibility = "hidden";
+  } else {
+    const afficheListeDemandes =
+      document.getElementById("afficheDemandes").innerHTML;
+    const templateDemande = Handlebars.compile(afficheListeDemandes);
+    const compiledHTMLDemande = templateDemande(listeDemande);
+    afficheDemandes.innerHTML = compiledHTMLDemande;
   }
-
-  const afficheListeDemandes =
-    document.getElementById("afficheDemandes").innerHTML;
-  const templateDemande = Handlebars.compile(afficheListeDemandes);
-
-  const compiledHTMLDemande = templateDemande(listeDemande);
-  const afficheDemandes = document.getElementById("mod");
-  afficheDemandes.innerHTML = compiledHTMLDemande;
 };
 
 // AFFICHAGE : section admin
@@ -134,6 +146,14 @@ if (roleConnecte && roleConnecte === "moderateur") {
 
 // METHODES
 
+const compareDate = (dateDemande) => {
+  const dateActuelle = new Date();
+  const [day, month, year] = dateDemande.split("-").map(Number);
+  const dateEnAttente = new Date(year, month - 1, day);
+
+  return dateEnAttente < dateActuelle;
+};
+
 const supprimerMembre = (user) => {
   const index = users.findIndex((membre) => membre.id === user);
   users.forEach((membre) => {
@@ -172,7 +192,7 @@ const refuserDate = (id) => {
 
 // GESTION evenements
 
-const actionSupprimer = () => {
+const actionSupprimerRole = () => {
   btnSupprimer = document.querySelectorAll("#supprimer");
 
   btnSupprimer.forEach((btn) => {
@@ -180,7 +200,7 @@ const actionSupprimer = () => {
       const valueBtn = parseInt(btn.value);
       supprimerMembre(valueBtn);
       afficheModAdmin();
-      actionSupprimer();
+      actionSupprimerRole();
     });
   });
 };
@@ -209,6 +229,19 @@ const actionDate = () => {
       actionDate();
     });
   });
+};
+
+const annulerDatePasse = () => {
+  demandes.forEach((demande) => {
+    if (demande.statut === "en attente") {
+      if (compareDate(demande.date)) {
+        demande.statut = "annulé";
+      }
+    }
+  });
+  sessionStorage.setItem("demandes", JSON.stringify(demandes));
+  handleDemande();
+  actionDate();
 };
 
 // GESTION formulaire
@@ -243,7 +276,6 @@ if (btnEnvoyer) {
     }
 
     if (!emailValue) {
-      infoMsg.style.display = "block";
       infoMsg.innerHTML = "Veuillez saisir un email";
       infoMsg.classList.add("msg-error");
     } else {
@@ -253,14 +285,14 @@ if (btnEnvoyer) {
       if (index !== -1) {
         listeRole.forEach((role) => {
           if (role === selectValue) {
+            console.log("helo");
             users[index].role = selectValue;
             sessionStorage.setItem("users", JSON.stringify(users));
             afficheModAdmin();
-            actionSupprimer();
+            actionSupprimerRole();
           }
         });
       } else {
-        infoMsg.style.display = "block";
         infoMsg.innerHTML = "Email incorrect";
         infoMsg.classList.add("msg-error");
       }
@@ -268,6 +300,12 @@ if (btnEnvoyer) {
   });
 }
 
+if (btnAnnulerDemandes) {
+  btnAnnulerDemandes.addEventListener("click", () => {
+    annulerDatePasse();
+  });
+}
+
 handleDemande();
 actionDate();
-actionSupprimer();
+actionSupprimerRole();

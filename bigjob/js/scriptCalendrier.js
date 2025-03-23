@@ -277,6 +277,7 @@ choixBtn.addEventListener("click", () => {
     afficheDate();
     dateClique.style.color = "white";
     dateClique = "";
+    choixBtn.style.visibility = "hidden";
   } else {
     console.log("essayer une autre date");
   }

@@ -46,7 +46,6 @@
                 Refuser
               </button>
             </div>
-
           </div>
         </div>
       {{/each}}
@@ -112,8 +111,14 @@
     </header>
     <main>
       <div
-        class="card-body d-flex justify-content-start align-items-center flex-column mb-5">
-        <h2 class="mb-5">Elèves souhaitant venir à l'école</h2>
+        class="card-body d-flex justify-content-start align-items-center flex-column mb-5 gap-4">
+        <h2 class="mb-0">Elèves souhaitant venir à l'école</h2>
+        <button
+          type="submit"
+          id="annulerDemandes"
+          class="btn btn-danger btn-sm mb-4">
+          Annuler toutes les demandes à date passées
+        </button>
         <div id="mod" class="d-flex gap-3 justify-content-center flex-wrap">
           <!--  -->
           <!--  -->
@@ -123,13 +128,16 @@
           <!--  -->
         </div>
       </div>
-      <div id="adminSection" class="pt-5 pb-5 d-flex flex-column gap-1">
+      <div
+        id="adminSection"
+        class="pt-5 pb-5 d-flex flex-column gap-1 bg-light text-bg-light">
+        <!-- formulaire ajouter un mod / admin -->
         <div class="m-auto" style="min-width: 10rem">
           <button
             id="ajouter"
             type="submit"
             class="btn btn-primary btn-sm w-100">
-            Ajouter
+            Ajouter un mod / admin
           </button>
         </div>
         <div id="ajoutRole">
@@ -153,8 +161,6 @@
               placeholder="Email" />
             <select name="type" id="type" class="text-center">
               <option>--Choisir un role--</option>
-              <option>moderateur</option>
-              <option>admin</option>
             </select>
             <button
               type="submit"

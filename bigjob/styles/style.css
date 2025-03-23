@@ -42,6 +42,7 @@
 .avant,
 .apres {
     color: #0062FF;
+    cursor: pointer;
 }
 
 .calendrier thead,
